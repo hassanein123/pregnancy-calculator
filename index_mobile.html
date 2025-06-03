@@ -1,0 +1,186 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>حاسبة الحمل والولادة</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #fff0f5;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+    .wrapper {
+      max-width: 600px;
+      margin: auto;
+      padding: 20px;
+    }
+    .header {
+      background-color: #ffe4ec;
+      padding: 20px;
+      border-radius: 12px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .header h1 {
+      color: #c2185b;
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+    .header p {
+      font-size: 16px;
+      color: #555;
+    }
+    .calculator {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      padding: 20px;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    select, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+    button {
+      background-color: #f06292;
+      color: white;
+      border: none;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+    button:hover {
+      background-color: #ec407a;
+    }
+    #result {
+      margin-top: 20px;
+      background-color: #e8f5e9;
+      padding: 12px;
+      border-radius: 8px;
+      color: #2e7d32;
+      font-weight: bold;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<div class="wrapper">
+  <div class="header">
+    <h1>حاسبة الحمل والولادة</h1>
+    <p>استخدمي هذه الأداة لتحديد موعد ولادتكِ المتوقع بناءً على تاريخ آخر دورة شهرية</p>
+  </div>
+
+  <div class="calculator">
+    <label for="day">اليوم</label>
+    <select id="day">
+      <option value="">-- اختاري اليوم --</option>
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+<option value="6">6</option>
+<option value="7">7</option>
+<option value="8">8</option>
+<option value="9">9</option>
+<option value="10">10</option>
+<option value="11">11</option>
+<option value="12">12</option>
+<option value="13">13</option>
+<option value="14">14</option>
+<option value="15">15</option>
+<option value="16">16</option>
+<option value="17">17</option>
+<option value="18">18</option>
+<option value="19">19</option>
+<option value="20">20</option>
+<option value="21">21</option>
+<option value="22">22</option>
+<option value="23">23</option>
+<option value="24">24</option>
+<option value="25">25</option>
+<option value="26">26</option>
+<option value="27">27</option>
+<option value="28">28</option>
+<option value="29">29</option>
+<option value="30">30</option>
+<option value="31">31</option>
+    </select>
+
+    <label for="month">الشهر</label>
+    <select id="month">
+      <option value="">-- اختاري الشهر --</option>
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+<option value="6">6</option>
+<option value="7">7</option>
+<option value="8">8</option>
+<option value="9">9</option>
+<option value="10">10</option>
+<option value="11">11</option>
+<option value="12">12</option>
+    </select>
+
+    <label for="year">السنة</label>
+    <select id="year">
+      <option value="">-- اختاري السنة --</option>
+<option value="2025">2025</option>
+<option value="2024">2024</option>
+<option value="2023">2023</option>
+<option value="2022">2022</option>
+<option value="2021">2021</option>
+<option value="2020">2020</option>
+<option value="2019">2019</option>
+<option value="2018">2018</option>
+<option value="2017">2017</option>
+<option value="2016">2016</option>
+    </select>
+
+    <button onclick="calculateDate()">احسبي موعد الولادة</button>
+    <div id="result"></div>
+  </div>
+</div>
+
+<script>
+  function calculateDate() {
+    const d = parseInt(document.getElementById("day").value);
+    const m = parseInt(document.getElementById("month").value);
+    const y = parseInt(document.getElementById("year").value);
+
+    if (!d || !m || !y) {
+      document.getElementById("result").textContent = "⚠️ الرجاء اختيار التاريخ الكامل.";
+      return;
+    }
+
+    const startDate = new Date(y, m - 1, d);
+    if (isNaN(startDate.getTime())) {
+      document.getElementById("result").textContent = "⚠️ التاريخ غير صالح.";
+      return;
+    }
+
+    const dueDate = new Date(startDate.getTime() + 280 * 24 * 60 * 60 * 1000);
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    const result = dueDate.toLocaleDateString('ar-EG', options);
+
+    document.getElementById("result").textContent = `📅 موعد الولادة المتوقع هو: ${result}`;
+  }
+</script>
+
+</body>
+</html>
